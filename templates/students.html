@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{% url 'add_student' %}">Add stuednt</a>
+<h2>Student List</h2>
+
+<table border="1">
+    <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Enrolled Course</th>
+        <th>Trainer</th>
+        <th>Active</th>
+        <th>Action</th>
+    </tr>
+
+    {% for s in students %}
+    <tr>
+        <td>{{ s.first_name }} {{ s.last_name }}</td>
+        <td>{{ s.email }}</td>
+
+        <td>
+            {% if s.enrolled_course %}
+                {{ s.enrolled_course.course_name }}
+            {% else %}
+                Not enrolled
+            {% endif %}
+        </td>
+
+        <td>
+            {% if s.trainer %}
+                {{ s.trainer.first_name }} {{ s.trainer.last_name }}
+            {% else %}
+                -
+            {% endif %}
+        </td>
+
+        <td>
+            {% if s.is_active %}
+                Yes
+            {% else %}
+                No
+            {% endif %}
+        </td>
+        <td>
+            <div>
+                <a href="{% url 'student_detail' s.id %}"><i class="fa fa-eye"></i></a>
+                {% if perms.academy.change_student %}
+                    <a href="{% url 'student_edit' s.id %}"><i class="fa fa-edit"></i></a>
+                {% endif %}
+                {% if perms.academy.delete_student %}
+                    <a href="{% url 'student_delete' s.id %}"><i class="fa fa-trash"></i></a>
+                {% endif %}
+            </div>
+        </td>
+                     
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

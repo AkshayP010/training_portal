@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Details</title>
+</head>
+<body>
+    
+<div>
+    <h2>{{ student.full_name }}</h2>
+    <p>Enrolled Course: {{ student.enrolled_course.course_name }}</p>
+    <p>Email: {{ student.email }}</p>
+    <p>Trainer: {{ student.trainer.first_name }}</p>
+        {% if student.student_photo %}
+        <img src="{{ student.student_photo.url }}" alt="{{ student.full_name }}" height="150">
+    {% else %}
+        <p>No photo available</p>
+    {% endif %}
+</div>
+
+        
+</body>
+</html>

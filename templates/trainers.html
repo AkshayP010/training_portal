@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="{% url 'add_trainer' %}">Add Trainer</a>
+<h2>Trainer List</h2>
+
+<table border="1">
+    <tr>
+        <th>Full Name</th>
+        <th>Expertise</th>
+        <th>Email</th>
+        <th>Photo</th>
+        <th>Action</th>
+    </tr>
+
+    {% for t in trainers %}
+    <tr>
+        <td>{{ t.first_name }} {{ t.last_name }}</td>
+        <td>{{ t.expertise }}</td>
+        <td>{{ t.email }}</td>
+        <td>
+            {% if t.trainer_photo %}
+                <img src="{{ t.trainer_photo.url }}" height="60">
+            {% else %}
+                No Photo
+            {% endif %}
+        </td>
+        <td>
+            <div>
+                <a href="{% url 'trainer_detail' t.id %}"><i class="fa fa-eye"></i></a>
+
+                {% if perms.academy.change_trainer %}  
+                    <a href="{% url 'trainer_edit' t.id %}"><i class="fa fa-edit"></i></a>
+                {% endif %}
+               
+                {% if perms.academy.delete_trainer %}  
+                    <a href="{% url 'trainer_delete' t.id %}"><i class="fa fa-trash"></i></a>
+                {% endif %}
+                
+            </div>
+    </td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

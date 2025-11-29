@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Details</title>
+</head>
+<body>
+    
+<div>
+    <h2>{{ trainer.full_name }}</h2>
+    <p>Expertise: {{ trainer.expertise }}</p>
+    <p>Email: {{ trainer.email }}</p>
+        {% if trainer.trainer_photo %}
+        <img src="{{ trainer.trainer_photo.url }}" alt="{{ trainer.full_name }}" height="150">
+    {% else %}
+        <p>No photo available</p>
+    {% endif %}
+</div>
+
+        
+</body>
+</html>
