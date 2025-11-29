@@ -26,7 +26,7 @@
         </td>
         <td>
             
-        {% if user.is_autenticated %}
+        {% if request.user.is_authenticated %}
         <div>
             <a href="{% url 'course_detail' c.id %}"><i class="fa fa-eye"></i></a>
             <a href="{% url 'course_edit' c.id %}"><i class="fa fa-edit"></i></a>
